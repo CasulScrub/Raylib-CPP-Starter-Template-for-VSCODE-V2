@@ -96,7 +96,7 @@ int main(void) {
 
         // Draw
         BeginDrawing();
-            ClearBackground(RAYWHITE);
+            ClearBackground(BLACK);
             
             // Draw all active balls
             for (int i = 0; i < MAX_BALLS; i++) {
