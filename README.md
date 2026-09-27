@@ -41,20 +41,21 @@ reachable, plus a C++ toolchain and `gdb`.
 so the expected layout is a `raylib-install` folder **next to** this project:
 
 ```bash
-git clone --branch 5.5 https://github.com/raysan5/raylib.git
-cd raylib/src
+git clone --branch 6.0 https://github.com/raysan5/raylib.git raylib-6.0
+cd raylib-6.0/src
 make PLATFORM=PLATFORM_DESKTOP          # builds ../src/libraylib.a
 sudo make install RAYLIB_LIBTYPE=STATIC # or copy manually, see below
 ```
 
-If you have no root access, `make install` refuses to run. Copy the four files
-it would have installed by hand:
+If you have no root access, `make install` refuses to run — the check is
+unconditional, so it fails even when you point it at a custom prefix. Copy the
+four files it would have installed by hand:
 
 ```bash
 PREFIX=../raylib-install
 mkdir -p $PREFIX/lib $PREFIX/include
-cp raylib/src/libraylib.a                 $PREFIX/lib/
-cp raylib/src/raylib.h raylib/src/raymath.h raylib/src/rlgl.h $PREFIX/include/
+cp raylib-6.0/src/libraylib.a                 $PREFIX/lib/
+cp raylib-6.0/src/raylib.h raylib-6.0/src/raymath.h raylib-6.0/src/rlgl.h $PREFIX/include/
 ```
 
 **2.** If your raylib lives somewhere else, override `DESTDIR` on the command
@@ -71,7 +72,7 @@ Note that a bare `make` with no arguments still looks for raylib under
 reads headers from `${workspaceFolder}/../raylib-install/include`, so move that
 path in `.vscode/c_cpp_properties.json` if you changed `DESTDIR`.
 
-Verified on CachyOS (Arch-based) with GCC 16.2, raylib 5.5 static, GLFW on X11.
+Verified on CachyOS (Arch-based) with GCC 16.2, raylib 6.0 static, GLFW on X11.
 
 ---
 
