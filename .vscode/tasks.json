@@ -30,9 +30,8 @@
             "linux": {
                 "args": [
                     "PROJECT_NAME=${fileBasenameNoExtension}",
-                    "DESTDIR=/home/linuxbrew/.linuxbrew",
-                    "RAYLIB_LIBTYPE=SHARED",
-                    "EXAMPLE_RUNTIME_PATH=/home/linuxbrew/.linuxbrew/lib",
+                    "DESTDIR=../raylib-install",
+                    "RAYLIB_LIBTYPE=STATIC",
                     "OBJS=src/*.cpp",
                     "BUILD_MODE=DEBUG"
                 ]
@@ -69,9 +68,8 @@
             "linux": {
                 "args": [
                     "PROJECT_NAME=${fileBasenameNoExtension}",
-                    "DESTDIR=/home/linuxbrew/.linuxbrew",
-                    "RAYLIB_LIBTYPE=SHARED",
-                    "EXAMPLE_RUNTIME_PATH=/home/linuxbrew/.linuxbrew/lib",
+                    "DESTDIR=../raylib-install",
+                    "RAYLIB_LIBTYPE=STATIC",
                     "OBJS=src/*.cpp"
                 ]
             },
@@ -82,7 +80,7 @@
                 "kind": "build",
                 "isDefault": false
             },
-            "detail": "compiler: C:\\raylib\\w64devkit\\bin\\g++.exe"
+            "detail": "compiler: g++ (toolchain path is set per-platform above)"
         }
     ]
 }

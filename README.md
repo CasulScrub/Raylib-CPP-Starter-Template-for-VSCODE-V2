@@ -31,6 +31,50 @@ A minimal C++ project scaffold for Visual Studio Code on Windows — includes a 
 
 ---
 
+## Building on Linux
+
+The three VS Code configs (task, launch, IntelliSense) each carry per-platform
+overrides, so F5 works on Linux as well as Windows. You need `raylib` built and
+reachable, plus a C++ toolchain and `gdb`.
+
+**1.** Build and install raylib. The build task passes `DESTDIR=../raylib-install`,
+so the expected layout is a `raylib-install` folder **next to** this project:
+
+```bash
+git clone --branch 5.5 https://github.com/raysan5/raylib.git
+cd raylib/src
+make PLATFORM=PLATFORM_DESKTOP          # builds ../src/libraylib.a
+sudo make install RAYLIB_LIBTYPE=STATIC # or copy manually, see below
+```
+
+If you have no root access, `make install` refuses to run. Copy the four files
+it would have installed by hand:
+
+```bash
+PREFIX=../raylib-install
+mkdir -p $PREFIX/lib $PREFIX/include
+cp raylib/src/libraylib.a                 $PREFIX/lib/
+cp raylib/src/raylib.h raylib/src/raymath.h raylib/src/rlgl.h $PREFIX/include/
+```
+
+**2.** If your raylib lives somewhere else, override `DESTDIR` on the command
+line rather than editing the task:
+
+```bash
+make PROJECT_NAME=main DESTDIR=/path/to/your/prefix
+```
+
+Note that a bare `make` with no arguments still looks for raylib under
+`/usr/local`, which is raylib's own upstream default, not a bug in this template.
+
+**3.** Open `main.code-workspace` and press `F5`. The `Linux` IntelliSense config
+reads headers from `${workspaceFolder}/../raylib-install/include`, so move that
+path in `.vscode/c_cpp_properties.json` if you changed `DESTDIR`.
+
+Verified on CachyOS (Arch-based) with GCC 16.2, raylib 5.5 static, GLFW on X11.
+
+---
+
 ## What's inside
 
 | | Feature | Details |
